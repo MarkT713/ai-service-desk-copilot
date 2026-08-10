@@ -16,6 +16,10 @@ A public, fully synthetic ServiceNow-style portfolio demo showing how an AI copi
 - SLA targets based on suggested priority
 - Draft requester responses
 - Explicit technician accept/reject workflow
+- Interactive troubleshooting workspace with bounded, sequential evidence collection
+- Updated hypotheses after each technician-recorded result
+- Human resolution verification or a structured escalation package
+- Security-only workflows that stop routine remediation and preserve evidence
 - Immutable-style audit history of analysis and technician decisions
 - Synthetic ServiceNow-style incident queue and technician workspace
 - Regression evaluations, API tests, Docker, and CI
@@ -34,6 +38,19 @@ uvicorn service_desk.app:app --reload
 ```
 
 Open <http://127.0.0.1:8000>, click **Reset demo**, select a ticket, and request an analysis.
+
+## Interactive troubleshooting
+
+After analyzing a ticket, choose **Start guided troubleshooting**. The workspace:
+
+1. Presents one cited diagnostic or evidence-collection step at a time.
+2. Explains the purpose and expected evidence.
+3. Requires a named technician to record `confirmed`, `not found`, or `inconclusive` results.
+4. Updates the current hypothesis without claiming that an action was executed.
+5. Requires observable restoration evidence before resolving a routine ticket.
+6. Produces a structured handoff when service is not restored.
+
+Security-sensitive tickets enter `escalation_only` mode. They preserve alert evidence and stop routine remediation rather than improvising endpoint changes.
 
 ## Verify
 

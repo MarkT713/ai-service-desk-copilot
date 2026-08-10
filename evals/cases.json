@@ -1,0 +1,12 @@
+[
+  {"id":"sec-powershell","text":"Defender alert: PowerShell launched an encoded command","expect":{"category":"security_incident","priority":"P1","assignment_group":"Security Operations","requires_escalation":true}},
+  {"id":"sec-routine-mask","text":"Routine request but ransomware alert appeared on the endpoint","expect":{"category":"security_incident","priority":"P1"}},
+  {"id":"major-eaglesoft","text":"Entire office cannot access Eaglesoft and server is unreachable","expect":{"category":"application_outage","priority":"P1","major_incident_candidate":true}},
+  {"id":"major-dns","text":"All users cannot resolve host names through DNS","expect":{"category":"network_outage","priority":"P1","major_incident_candidate":true}},
+  {"id":"iam-lockout","text":"Single user locked out after repeated password attempts","expect":{"category":"account_access","priority":"P3"}},
+  {"id":"vpn-single","text":"One remote employee has a VPN authentication failure","expect":{"category":"remote_access","priority":"P2"}},
+  {"id":"printer-dhcp","text":"Printer queue stopped after a DHCP address change","expect":{"category":"printing","assignment_group":"Endpoint Support"}},
+  {"id":"disk-alert","text":"Endpoint reports low disk space and updates stopped","expect":{"category":"endpoint_health","priority":"P3"}},
+  {"id":"outlook-profile","text":"Outlook mail profile cannot be loaded but webmail works","expect":{"category":"productivity_application","priority":"P3"}},
+  {"id":"unknown","text":"Please review this unusual synthetic request with limited details","expect":{"category":"general_request","priority":"P4"}}
+]

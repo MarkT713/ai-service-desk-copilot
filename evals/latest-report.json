@@ -1,0 +1,92 @@
+{
+  "suite": "synthetic deterministic routing regression",
+  "passed": 10,
+  "total": 10,
+  "release_gate": true,
+  "results": [
+    {
+      "id": "sec-powershell",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "priority": true,
+        "assignment_group": true,
+        "requires_escalation": true
+      }
+    },
+    {
+      "id": "sec-routine-mask",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "priority": true
+      }
+    },
+    {
+      "id": "major-eaglesoft",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "priority": true,
+        "major_incident_candidate": true
+      }
+    },
+    {
+      "id": "major-dns",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "priority": true,
+        "major_incident_candidate": true
+      }
+    },
+    {
+      "id": "iam-lockout",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "priority": true
+      }
+    },
+    {
+      "id": "vpn-single",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "priority": true
+      }
+    },
+    {
+      "id": "printer-dhcp",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "assignment_group": true
+      }
+    },
+    {
+      "id": "disk-alert",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "priority": true
+      }
+    },
+    {
+      "id": "outlook-profile",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "priority": true
+      }
+    },
+    {
+      "id": "unknown",
+      "passed": true,
+      "checks": {
+        "category": true,
+        "priority": true
+      }
+    }
+  ]
+}

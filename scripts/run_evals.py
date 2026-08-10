@@ -5,7 +5,7 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(root))
 
-from service_desk.copilot import analyze_ticket
+from service_desk.copilot import analyze_ticket  # noqa: E402
 
 cases = json.loads((root / "evals/cases.json").read_text())
 results = []

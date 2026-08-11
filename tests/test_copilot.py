@@ -24,6 +24,14 @@ def test_multi_user_outage_is_p1_infrastructure_incident():
     assert result.major_incident_candidate is True
 
 
+def test_error_code_is_not_mistaken_for_affected_user_count():
+    result = analyze_ticket("VPN fails after MFA with error 720 for one remote employee.")
+
+    assert result.category == "remote_access"
+    assert result.priority == "P2"
+    assert result.major_incident_candidate is False
+
+
 def test_account_lockout_routes_identity_and_access():
     result = analyze_ticket("Single user is locked out after too many password attempts.")
     assert result.category == "account_access"

@@ -85,7 +85,10 @@ def detect_duplicates(text: str, tickets: list[dict]) -> list[dict]:
 def analyze_ticket(text: str) -> CopilotAnalysis:
     safe_text, privacy_findings = redact_sensitive_text(text)
     value = safe_text.lower()
-    count_match = re.search(r"\b(\d{1,3})\b", value)
+    count_match = re.search(
+        r"\b(\d{1,3})\s+(?:users?|workstations?|devices?|endpoints?|people|employees?)\b",
+        value,
+    )
     reported_count = int(count_match.group(1)) if count_match else 1
     widespread = reported_count >= 3 or any(p in value for p in ("all users", "multiple users", "entire office", "front desk workstations", "company-wide", "server is unreachable"))
 

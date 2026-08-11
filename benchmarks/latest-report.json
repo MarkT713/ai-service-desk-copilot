@@ -1,0 +1,1508 @@
+{
+  "schema_version": 2,
+  "benchmark": "service-desk-cost-efficiency-replay-v1",
+  "methodology": {
+    "execution": "deterministic replay; no provider API called",
+    "tokenizer": "o200k_base",
+    "tokenizer_package_version": "0.13.0",
+    "token_count_boundary": "prompt and completion content; provider-specific message overhead excluded",
+    "policy_version": "service-desk-policy-v2",
+    "prompt_version": "cost-aware-draft-v1",
+    "output_schema_version": 1,
+    "authorization_policy_version": "synthetic-no-auth-v1",
+    "pricing": {
+      "version": "illustrative-usd-2026-08-v1",
+      "large_input_per_million": 10.0,
+      "large_output_per_million": 30.0,
+      "small_input_per_million": 0.3,
+      "small_output_per_million": 1.2
+    },
+    "pricing_disclaimer": "Illustrative versioned rates, not a claim about current vendor pricing.",
+    "fixture_conformance": "Shared deterministic analysis plus route-specific modeled-output schema, alignment, reviewability, and privacy checks. This is not independent live-model quality evidence.",
+    "fixture_sha256": "7eaf2d89cd29ab4860303a8497d2f73cd157b64d79e6334c82f20b92488b869a",
+    "engine_sha256": "be5f74387771225df8da7c0f9e2d8ba41ba2adead018b026e2b42e04b31f4fb0"
+  },
+  "summary": {
+    "case_count": 12,
+    "unique_ticket_text_count": 10,
+    "baseline_model_calls": 12,
+    "optimized_model_calls": 9,
+    "optimized_large_model_calls": 2,
+    "optimized_small_model_calls": 7,
+    "baseline_total_tokens": 8134,
+    "optimized_total_tokens": 1355,
+    "token_reduction_pct": 83.34,
+    "baseline_estimated_cost_usd": 0.12522,
+    "optimized_estimated_cost_usd": 0.0052574,
+    "cost_reduction_pct": 95.8,
+    "baseline_fixture_conformance_score": 100.0,
+    "optimized_fixture_conformance_score": 100.0,
+    "fixture_conformance_delta_points": 0.0,
+    "optimized_cache_hits": 1,
+    "optimized_cache_eligible_cases": 10,
+    "optimized_cache_hit_rate_pct": 10.0,
+    "optimized_large_model_escalation_rate_pct": 22.22,
+    "latency": "not measured; no provider API called",
+    "fixture_defined_safety_failures": 0
+  },
+  "gates": {
+    "thresholds": {
+      "minimum_cost_reduction_pct": 50.0,
+      "minimum_token_reduction_pct": 50.0,
+      "minimum_baseline_fixture_conformance_score": 100.0,
+      "minimum_optimized_fixture_conformance_score": 100.0,
+      "maximum_conformance_drop_points": 0.0,
+      "minimum_unique_ticket_text_count": 10,
+      "maximum_fixture_defined_safety_failures": 0
+    },
+    "passed": true
+  },
+  "cases": [
+    {
+      "id": "security-powershell",
+      "principal_scope": "technician:general",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 495,
+        "output_tokens": 195,
+        "total_tokens": 690,
+        "estimated_cost_usd": 0.0108,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 495,
+            "output_tokens": 195,
+            "estimated_cost_usd": 0.0108,
+            "prompt_sha256": "32305afc3006b4cfbad17977784ae88953b4ccf5bb05dcfa4a0f1e89a1f1a892",
+            "completion_sha256": "181ff163d19d3d5f087b4f632551a32c899041b92c6f76e886c3d82f83c7bfd9"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "deterministic_security_gate",
+        "cache_hit": false,
+        "model_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "estimated_cost_usd": 0,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": []
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "application-outage",
+      "principal_scope": "technician:site-a",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 497,
+        "output_tokens": 191,
+        "total_tokens": 688,
+        "estimated_cost_usd": 0.0107,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 497,
+            "output_tokens": 191,
+            "estimated_cost_usd": 0.0107,
+            "prompt_sha256": "7677dc0fad025a40f787354bf8345a9f7a7754ac78da053b334211028ef27a7a",
+            "completion_sha256": "43b683681c316f5cb7041f00236dcc3064e2abb85148f737238466eec702bc2b"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "large_exception_path",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 109,
+        "output_tokens": 48,
+        "total_tokens": 157,
+        "estimated_cost_usd": 0.00253,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "bounded_response_draft",
+            "input_tokens": 109,
+            "output_tokens": 48,
+            "estimated_cost_usd": 0.00253,
+            "prompt_sha256": "c91fcaf3b2b95e19830e9ed87e3e9b50a2f9954e1de9f6d5f6b9978f26b34c78",
+            "completion_sha256": "f0338b0a74760f6d6d90d380242fe2da05531681ad6811137367bcc1528f8eb2"
+          }
+        ]
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "account-lockout",
+      "principal_scope": "technician:identity",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 497,
+        "output_tokens": 184,
+        "total_tokens": 681,
+        "estimated_cost_usd": 0.01049,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 497,
+            "output_tokens": 184,
+            "estimated_cost_usd": 0.01049,
+            "prompt_sha256": "b0423fec75d3d976f39514aa7938d0347b7d5580e1b2258f95f1e4aa59637407",
+            "completion_sha256": "32b0ae0cb1f1e6eb10f937cef4cfdf575fedd47428a9be80e854c21ca7efa4e0"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "small_grounded_draft",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 112,
+        "output_tokens": 50,
+        "total_tokens": 162,
+        "estimated_cost_usd": 9.36e-05,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "small-draft-v1",
+            "purpose": "bounded_response_draft",
+            "input_tokens": 112,
+            "output_tokens": 50,
+            "estimated_cost_usd": 9.36e-05,
+            "prompt_sha256": "fde0776a31c1402785a666543708825b076bcb7274b2ef4e6e28e0dd27e2960f",
+            "completion_sha256": "f2c396a6858e036c7cca458a916f7e17ffbe34861950ebfefad7eb037fe8e12e"
+          }
+        ]
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "vpn-routine",
+      "principal_scope": "technician:general",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 496,
+        "output_tokens": 184,
+        "total_tokens": 680,
+        "estimated_cost_usd": 0.01048,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 496,
+            "output_tokens": 184,
+            "estimated_cost_usd": 0.01048,
+            "prompt_sha256": "3972557f289a6dbdb5f58340e453cbe8ee888f470bd5a42d5137cbfa973b687a",
+            "completion_sha256": "595edf30dbf4490e41e9e2f307e49227f7a4c29f1cf1368b405cc84347553043"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "small_grounded_draft",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 110,
+        "output_tokens": 48,
+        "total_tokens": 158,
+        "estimated_cost_usd": 9.06e-05,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "small-draft-v1",
+            "purpose": "bounded_response_draft",
+            "input_tokens": 110,
+            "output_tokens": 48,
+            "estimated_cost_usd": 9.06e-05,
+            "prompt_sha256": "c7572d5a093bb8be18cc30a59d2fbb93a8c247cd5c991b45c8e93c4e95582dd5",
+            "completion_sha256": "7f6614f348e7123b976818f2e4a407cfcef3e93d797d13c0795882a986d01bbf"
+          }
+        ]
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "dns-routine",
+      "principal_scope": "technician:general",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 495,
+        "output_tokens": 174,
+        "total_tokens": 669,
+        "estimated_cost_usd": 0.01017,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 495,
+            "output_tokens": 174,
+            "estimated_cost_usd": 0.01017,
+            "prompt_sha256": "ff1df5de9a27115902864874f826ef166a750c879f6d9a240b82235478ecf5ac",
+            "completion_sha256": "d767b3ad5a6df34332fc34de115957b490f6172211d0cb07978935718d2a62b7"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "small_grounded_draft",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 106,
+        "output_tokens": 47,
+        "total_tokens": 153,
+        "estimated_cost_usd": 8.82e-05,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "small-draft-v1",
+            "purpose": "bounded_response_draft",
+            "input_tokens": 106,
+            "output_tokens": 47,
+            "estimated_cost_usd": 8.82e-05,
+            "prompt_sha256": "99e9b686e6223060b76e4f94f87237014fb3aba8f2d13ea19cb8321d29ff1557",
+            "completion_sha256": "46e4ab1d0a08059052d87522ea73a0624fcae6c46da41dd7cc9b9707f90e8e2a"
+          }
+        ]
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "printer-routine",
+      "principal_scope": "technician:site-a",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 492,
+        "output_tokens": 178,
+        "total_tokens": 670,
+        "estimated_cost_usd": 0.01026,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 492,
+            "output_tokens": 178,
+            "estimated_cost_usd": 0.01026,
+            "prompt_sha256": "2fd1312fc2a7057247bb2313ec823aa0235c105859afff38c7f2687276838227",
+            "completion_sha256": "fd6b29ad50c58ee1752a4b8d0d3563a33972f363420d62a28e9378392303a36c"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "small_grounded_draft",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 107,
+        "output_tokens": 44,
+        "total_tokens": 151,
+        "estimated_cost_usd": 8.49e-05,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "small-draft-v1",
+            "purpose": "bounded_response_draft",
+            "input_tokens": 107,
+            "output_tokens": 44,
+            "estimated_cost_usd": 8.49e-05,
+            "prompt_sha256": "fe0da341b6cc4e35c7a9d24d9729ff562b04fbe3dd4b52c5747ae8c42e1bc46b",
+            "completion_sha256": "8d9b42567bc5720092d5b6f80b735d82a208e29db784fea998b5b4ec41a9d0c2"
+          }
+        ]
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "disk-routine",
+      "principal_scope": "technician:general",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 493,
+        "output_tokens": 177,
+        "total_tokens": 670,
+        "estimated_cost_usd": 0.01024,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 493,
+            "output_tokens": 177,
+            "estimated_cost_usd": 0.01024,
+            "prompt_sha256": "81ef19c20fce415f759a95b9e098478c1a2355771211615a8ab2f68339aa722d",
+            "completion_sha256": "42a5083919fbe66595ebe210b4d6eced76bec0c215a557cd51be5e22b55f4fbd"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "small_grounded_draft",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 104,
+        "output_tokens": 45,
+        "total_tokens": 149,
+        "estimated_cost_usd": 8.52e-05,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "small-draft-v1",
+            "purpose": "bounded_response_draft",
+            "input_tokens": 104,
+            "output_tokens": 45,
+            "estimated_cost_usd": 8.52e-05,
+            "prompt_sha256": "49d7056c0605385f5c63a4105abd741fe3f4f54810b591977b313d1c5fc02604",
+            "completion_sha256": "010b6cb60c2520e8bea03b1d12529b8348a8a7b14758a4ed8da6469aa9bbfd7c"
+          }
+        ]
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "outlook-routine",
+      "principal_scope": "technician:general",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 495,
+        "output_tokens": 184,
+        "total_tokens": 679,
+        "estimated_cost_usd": 0.01047,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 495,
+            "output_tokens": 184,
+            "estimated_cost_usd": 0.01047,
+            "prompt_sha256": "90bc468552017954488f0fe2076d695f14ba832704fdab7ae9da2d9676b26565",
+            "completion_sha256": "36c7b3a488be6e74df34094010a241aefda555c181bbbb554d80bc64dc69305c"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "small_grounded_draft",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 112,
+        "output_tokens": 47,
+        "total_tokens": 159,
+        "estimated_cost_usd": 9e-05,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "small-draft-v1",
+            "purpose": "bounded_response_draft",
+            "input_tokens": 112,
+            "output_tokens": 47,
+            "estimated_cost_usd": 9e-05,
+            "prompt_sha256": "63941547442324423b37f881be7c7da258f42e2945492ec20cad38f76f4b1618",
+            "completion_sha256": "4d09ddd56b35f4020910d9f615961b663401fc70d524efad393bebd10a6ab454"
+          }
+        ]
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "manual-triage-redaction",
+      "principal_scope": "technician:general",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 498,
+        "output_tokens": 171,
+        "total_tokens": 669,
+        "estimated_cost_usd": 0.01011,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 498,
+            "output_tokens": 171,
+            "estimated_cost_usd": 0.01011,
+            "prompt_sha256": "3cd03f8895ad32e8c2482bd9944da495e3adfc20fdeae2c40e3e6f23f5c399f7",
+            "completion_sha256": "a45b784ab14ffb7253e7bb15eaea7382eb424d531084680e87151e5c0a0ebc28"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "large_exception_path",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 67,
+        "output_tokens": 48,
+        "total_tokens": 115,
+        "estimated_cost_usd": 0.00211,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "bounded_response_draft",
+            "input_tokens": 67,
+            "output_tokens": 48,
+            "estimated_cost_usd": 0.00211,
+            "prompt_sha256": "fb699827ee9af5420ae57d6f46afd8f47d792c88ba99f73d0316937035ee3702",
+            "completion_sha256": "9e6a8ae3f4bcc5d2657d5f72fb5aa465a57ef9ac85e30a97a236333f0db3590a"
+          }
+        ]
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "vpn-scope-keyed-replay-repeat",
+      "principal_scope": "technician:general",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 496,
+        "output_tokens": 184,
+        "total_tokens": 680,
+        "estimated_cost_usd": 0.01048,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 496,
+            "output_tokens": 184,
+            "estimated_cost_usd": 0.01048,
+            "prompt_sha256": "3972557f289a6dbdb5f58340e453cbe8ee888f470bd5a42d5137cbfa973b687a",
+            "completion_sha256": "595edf30dbf4490e41e9e2f307e49227f7a4c29f1cf1368b405cc84347553043"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "scope_keyed_replay_cache",
+        "cache_hit": true,
+        "model_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "estimated_cost_usd": 0,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": []
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "printer-different-scope-no-cache",
+      "principal_scope": "technician:site-b",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 492,
+        "output_tokens": 178,
+        "total_tokens": 670,
+        "estimated_cost_usd": 0.01026,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 492,
+            "output_tokens": 178,
+            "estimated_cost_usd": 0.01026,
+            "prompt_sha256": "2fd1312fc2a7057247bb2313ec823aa0235c105859afff38c7f2687276838227",
+            "completion_sha256": "fd6b29ad50c58ee1752a4b8d0d3563a33972f363420d62a28e9378392303a36c"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "small_grounded_draft",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 107,
+        "output_tokens": 44,
+        "total_tokens": 151,
+        "estimated_cost_usd": 8.49e-05,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "small-draft-v1",
+            "purpose": "bounded_response_draft",
+            "input_tokens": 107,
+            "output_tokens": 44,
+            "estimated_cost_usd": 8.49e-05,
+            "prompt_sha256": "fe0da341b6cc4e35c7a9d24d9729ff562b04fbe3dd4b52c5747ae8c42e1bc46b",
+            "completion_sha256": "8d9b42567bc5720092d5b6f80b735d82a208e29db784fea998b5b4ec41a9d0c2"
+          }
+        ]
+      },
+      "safety_passed": true
+    },
+    {
+      "id": "security-phishing",
+      "principal_scope": "technician:general",
+      "baseline": {
+        "route": "large_full_context",
+        "cache_hit": false,
+        "model_calls": 1,
+        "input_tokens": 494,
+        "output_tokens": 194,
+        "total_tokens": 688,
+        "estimated_cost_usd": 0.01076,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": [
+          {
+            "model": "large-general-v1",
+            "purpose": "full_workflow",
+            "input_tokens": 494,
+            "output_tokens": 194,
+            "estimated_cost_usd": 0.01076,
+            "prompt_sha256": "83f5abd6096ca8c64b28e67b2e2ec6e9577aa9df4ca43198f9e1419924e766fc",
+            "completion_sha256": "6a57c2d503f2b3d483ba5a0e8048f97b62e2f93e5b0ca914e18b0bd51ee9805a"
+          }
+        ]
+      },
+      "optimized": {
+        "route": "deterministic_security_gate",
+        "cache_hit": false,
+        "model_calls": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "estimated_cost_usd": 0,
+        "conformance_passed": true,
+        "conformance_checks": [
+          {
+            "name": "category",
+            "passed": true
+          },
+          {
+            "name": "priority",
+            "passed": true
+          },
+          {
+            "name": "assignment_group",
+            "passed": true
+          },
+          {
+            "name": "citations",
+            "passed": true
+          },
+          {
+            "name": "requires_escalation",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_schema",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_policy_alignment",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_reviewability",
+            "passed": true
+          },
+          {
+            "name": "modeled_output_privacy",
+            "passed": true
+          }
+        ],
+        "calls": []
+      },
+      "safety_passed": true
+    }
+  ]
+}

@@ -5,6 +5,7 @@ RUN useradd --create-home --uid 10001 appuser && mkdir /data && chown appuser:ap
 COPY pyproject.toml ./
 COPY service_desk ./service_desk
 COPY static ./static
+COPY benchmarks ./benchmarks
 RUN pip install --no-cache-dir .
 USER 10001
 EXPOSE 8000

@@ -6,11 +6,35 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with: {python-version: "3.12"}
       - run: pip install -e '.[dev]'
       - run: ruff check .
       - run: pytest -q
+      - run: pip-audit
       - run: python scripts/run_evals.py
+      - run: python scripts/run_cost_benchmark.py --check
+      - run: python scripts/verify_benchmark_report.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cost-efficiency-evidence
+          path: |
+            benchmarks/latest-report.json
+            benchmarks/latest-report.md
+            benchmarks/cases.json
       - run: docker build -t service-desk-copilot:test .
+      - name: Exercise hardened container and cost evidence endpoint
+        run: |
+          docker volume create service-desk-ci
+          docker run -d --name service-desk-ci \
+            --read-only --tmpfs /tmp:uid=10001,gid=10001 \
+            --security-opt no-new-privileges --cap-drop ALL \
+            -v service-desk-ci:/data \
+            -p 127.0.0.1:8765:8000 service-desk-copilot:test
+          python scripts/verify_container.py
+      - name: Clean up container verification
+        if: always()
+        run: |
+          docker rm -f service-desk-ci 2>/dev/null || true
+          docker volume rm service-desk-ci 2>/dev/null || true

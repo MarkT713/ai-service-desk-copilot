@@ -1,0 +1,98 @@
+[
+  {
+    "id": "security-powershell",
+    "ticket": "Defender alert reports encoded PowerShell on WS-44.",
+    "principal_scope": "technician:general",
+    "security_gate_required": true,
+    "forbidden_markers": [],
+    "expected": {"category": "security_incident", "priority": "P1", "assignment_group": "Security Operations", "citation_ids": ["KB-SEC-001"], "requires_escalation": true}
+  },
+  {
+    "id": "application-outage",
+    "ticket": "Eaglesoft server is unreachable for all users across the entire office.",
+    "principal_scope": "technician:site-a",
+    "security_gate_required": false,
+    "forbidden_markers": [],
+    "expected": {"category": "application_outage", "priority": "P1", "assignment_group": "Infrastructure", "citation_ids": ["KB-APP-014"], "requires_escalation": true}
+  },
+  {
+    "id": "account-lockout",
+    "ticket": "One user is locked out after repeated password attempts and needs identity verification.",
+    "principal_scope": "technician:identity",
+    "security_gate_required": false,
+    "forbidden_markers": [],
+    "expected": {"category": "account_access", "priority": "P3", "assignment_group": "Identity & Access", "citation_ids": ["KB-IAM-003"], "requires_escalation": false}
+  },
+  {
+    "id": "vpn-routine",
+    "ticket": "VPN fails after MFA with error 720 for one remote employee.",
+    "principal_scope": "technician:general",
+    "security_gate_required": false,
+    "forbidden_markers": [],
+    "expected": {"category": "remote_access", "priority": "P2", "assignment_group": "Network Operations", "citation_ids": ["KB-VPN-006"], "requires_escalation": false}
+  },
+  {
+    "id": "dns-routine",
+    "ticket": "One workstation cannot resolve host names but direct IP connectivity works.",
+    "principal_scope": "technician:general",
+    "security_gate_required": false,
+    "forbidden_markers": [],
+    "expected": {"category": "network_connectivity", "priority": "P2", "assignment_group": "Network Operations", "citation_ids": ["KB-NET-009"], "requires_escalation": false}
+  },
+  {
+    "id": "printer-routine",
+    "ticket": "Printer queue stopped after the DHCP address changed.",
+    "principal_scope": "technician:site-a",
+    "security_gate_required": false,
+    "forbidden_markers": [],
+    "expected": {"category": "printing", "priority": "P3", "assignment_group": "Endpoint Support", "citation_ids": ["KB-PRN-005"], "requires_escalation": false}
+  },
+  {
+    "id": "disk-routine",
+    "ticket": "Laptop reports low disk space and update cache growth.",
+    "principal_scope": "technician:general",
+    "security_gate_required": false,
+    "forbidden_markers": [],
+    "expected": {"category": "endpoint_health", "priority": "P3", "assignment_group": "Endpoint Support", "citation_ids": ["KB-END-011"], "requires_escalation": false}
+  },
+  {
+    "id": "outlook-routine",
+    "ticket": "Outlook mail profile will not open but web mail works.",
+    "principal_scope": "technician:general",
+    "security_gate_required": false,
+    "forbidden_markers": [],
+    "expected": {"category": "productivity_application", "priority": "P3", "assignment_group": "Endpoint Support", "citation_ids": ["KB-M365-008"], "requires_escalation": false}
+  },
+  {
+    "id": "manual-triage-redaction",
+    "ticket": "The custom widget behaves oddly. password: never-log-this. Need help.",
+    "principal_scope": "technician:general",
+    "security_gate_required": false,
+    "forbidden_markers": ["never-log-this"],
+    "expected": {"category": "general_request", "priority": "P4", "assignment_group": "Service Desk – Manual Triage", "citation_ids": [], "requires_escalation": false}
+  },
+  {
+    "id": "vpn-scope-keyed-replay-repeat",
+    "ticket": "VPN fails after MFA with error 720 for one remote employee.",
+    "principal_scope": "technician:general",
+    "security_gate_required": false,
+    "forbidden_markers": [],
+    "expected": {"category": "remote_access", "priority": "P2", "assignment_group": "Network Operations", "citation_ids": ["KB-VPN-006"], "requires_escalation": false}
+  },
+  {
+    "id": "printer-different-scope-no-cache",
+    "ticket": "Printer queue stopped after the DHCP address changed.",
+    "principal_scope": "technician:site-b",
+    "security_gate_required": false,
+    "forbidden_markers": [],
+    "expected": {"category": "printing", "priority": "P3", "assignment_group": "Endpoint Support", "citation_ids": ["KB-PRN-005"], "requires_escalation": false}
+  },
+  {
+    "id": "security-phishing",
+    "ticket": "User opened a phishing attachment and Defender reports malware activity.",
+    "principal_scope": "technician:general",
+    "security_gate_required": true,
+    "forbidden_markers": [],
+    "expected": {"category": "security_incident", "priority": "P1", "assignment_group": "Security Operations", "citation_ids": ["KB-SEC-001"], "requires_escalation": true}
+  }
+]

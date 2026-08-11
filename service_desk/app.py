@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel, ConfigDict, Field
 
 from .copilot import ARTICLES, analyze_ticket, detect_duplicates, redact_sensitive_text
+from .cost_efficiency import load_verified_report
 from .troubleshooting import build_troubleshooting_plan
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -103,7 +104,13 @@ def _row(row: sqlite3.Row) -> dict:
 
 def create_app(db_path: str | None = None) -> FastAPI:
     path = db_path or os.getenv("SERVICE_DESK_DB", str(ROOT / "service-desk.db"))
-    app = FastAPI(title="AI Service Desk Copilot", version="0.2.0")
+    app = FastAPI(title="AI Service Desk Copilot", version="0.3.0")
+    try:
+        verified_cost_report = load_verified_report()
+        cost_evidence_status = "verified"
+    except (OSError, ValueError, json.JSONDecodeError):
+        verified_cost_report = None
+        cost_evidence_status = "unavailable"
 
     @contextmanager
     def db():
@@ -192,7 +199,19 @@ def create_app(db_path: str | None = None) -> FastAPI:
 
     @app.get("/health")
     def health():
-        return {"status": "ok", "mode": "synthetic-demo", "human_approval_required": True}
+        return {
+            "status": "ok",
+            "mode": "synthetic-demo",
+            "human_approval_required": True,
+            "cost_benchmark": "deterministic-replay-v1",
+            "cost_evidence_status": cost_evidence_status,
+        }
+
+    @app.get("/api/benchmarks/cost")
+    def cost_benchmark():
+        if verified_cost_report is None:
+            raise HTTPException(503, "Checked-in cost benchmark evidence failed verification")
+        return verified_cost_report
 
     @app.post("/api/demo/reset")
     def reset_demo():

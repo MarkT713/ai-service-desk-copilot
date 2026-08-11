@@ -1,6 +1,24 @@
-# AI Service Desk Copilot
+# AI Service Desk Copilot — Cost-Aware Workflow Agent
 
 A public, fully synthetic ServiceNow-style portfolio demo showing how an AI copilot can assist—but not control—enterprise support operations.
+
+## Modeled cost-efficiency evidence
+
+The checked-in 12-case replay compares an intentionally expensive full-context baseline with a cost-aware hybrid workflow:
+
+| Result | Baseline | Optimized | Change |
+|---|---:|---:|---:|
+| Model calls | 12 | 9 | 3 fewer |
+| Content tokens | 8,134 | 1,355 | **83.34% reduction** |
+| Estimated cost | $0.125220 | $0.005257 | **95.80% reduction** |
+| Deterministic fixture conformance | 100/100 | 100/100 | 0-point change |
+| Large-model escalation rate | 100.00% | 22.22% | bounded exceptions |
+| Scope-keyed replay cache-hit rate | — | 10.00% | not authorization evidence |
+| Fixture-defined safety failures | — | 0 | gate passed |
+
+These are **modeled synthetic replay results**, not production savings, provider billing, or a live-model benchmark. No provider API was called. The 100/100 values score the shared deterministic analyzer plus route-specific modeled-output schema, policy-alignment, reviewability, and privacy checks; they do not compare independent model completions. Tokens use the versioned `o200k_base` boundary, while costs use checked-in illustrative rates. Inspect the [methodology and threat model](docs/COST_EFFICIENCY.md), [human-readable report](benchmarks/latest-report.md), [raw JSON evidence](benchmarks/latest-report.json), and [public synthetic fixture corpus](benchmarks/cases.json).
+
+![Cost-aware service desk dashboard showing modeled token, cost, deterministic conformance, and fixture-defined safety evidence](docs/assets/cost-dashboard.png)
 
 > **Safety boundary:** Use synthetic data only. The copilot generates reviewable suggestions. It cannot close tickets, make endpoint changes, reset accounts, isolate devices, or authorize its own recommendations.
 
@@ -23,6 +41,10 @@ A public, fully synthetic ServiceNow-style portfolio demo showing how an AI copi
 - Immutable-style audit history of analysis and technician decisions
 - Synthetic ServiceNow-style incident queue and technician workspace
 - Regression evaluations, API tests, Docker, and CI
+- Deterministic policy gates that avoid model calls for security-sensitive tickets
+- Simulated small/large execution envelopes with minimum necessary evidence
+- Scope-keyed replay caching with policy, schema, model, redacted-input, and evidence fingerprints; this is not authentication or authorization evidence
+- Reproducible token, modeled-call, estimated-cost, absolute fixture-conformance, and fixture-defined safety gates
 
 ## Demonstrated scenarios
 
@@ -58,6 +80,7 @@ Security-sensitive tickets enter `escalation_only` mode. They preserve alert evi
 pytest -q
 ruff check .
 python scripts/run_evals.py
+python scripts/run_cost_benchmark.py --check
 docker compose config
 docker build -t ai-service-desk-copilot .
 ```
@@ -65,16 +88,20 @@ docker build -t ai-service-desk-copilot .
 ## Architecture
 
 ```text
-Synthetic ticket → deterministic copilot → cited KB + duplicate evidence
-                                           ↓
-Technician review → accept/reject → controlled ticket update → audit event
+Synthetic ticket → redaction → deterministic policy/security gate
+                                      ↓
+                      bounded evidence + route decision
+                         ↙          ↓           ↘
+                  no model   simulated small  simulated large
+                         ↘          ↓           ↙
+                technician review → controlled update → audit event
 ```
 
-The initial release deliberately uses deterministic rules and lexical retrieval so every recommendation is inspectable and reproducible. A future optional LLM adapter can draft language, but deterministic security escalation and authorization boundaries must remain authoritative.
+The current release deliberately uses deterministic replay so routing, token accounting, conformance checks, and fixture-defined safety gates are reproducible without an API key. The model paths are simulated execution envelopes whose locally constructed prompts and completions are tokenized and priced by a versioned illustrative price card. A future optional live-provider adapter may draft language, but deterministic security escalation and human approval remain authoritative; production authorization is not implemented here.
 
 ## Honest limitations
 
-This is not connected to ServiceNow, Microsoft Entra ID, an EDR, RMM, SIEM, email, production endpoints, or a real employer environment. The built-in knowledge base and tickets are fictional. Priority logic is illustrative and must be replaced with an organization's approved impact/urgency matrix before real use. Authentication, named-user RBAC, tenant isolation, enterprise secrets, retention, and integration-specific controls are required for production.
+This is not connected to ServiceNow, Microsoft Entra ID, an EDR, RMM, SIEM, email, production endpoints, a model provider, or a real employer environment. The built-in knowledge base and tickets are fictional. The cost replay does not measure production latency, provider billing, or probabilistic model quality. Priority logic is illustrative and must be replaced with an organization's approved impact/urgency matrix before real use. Authentication, named-user RBAC, tenant isolation, enterprise secrets, retention, and integration-specific controls are required for production.
 
 ## Planned next increments
 
